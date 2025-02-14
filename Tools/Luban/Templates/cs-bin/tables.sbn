@@ -11,6 +11,16 @@ public partial class {{__name}}
 {{~end~}}
     public {{table.full_name}} {{format_property_name __code_style table.name}} {get; }
     {{~end~}}
+    
+    /// <summary>
+    /// 所有原始配置表文件名的静态列表
+    /// </summary>
+    public static string[] AllTableNames { get; } = new[]
+    {
+        {{~for table in __tables~}}
+        "{{table.output_data_file}}"{{if !for.last}},{{end}}
+        {{~end~}}
+    };
 
     public {{__name}}(System.Func<string, ByteBuf> loader)
     {
